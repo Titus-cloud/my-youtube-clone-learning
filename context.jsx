@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const StateContext = createContext();
 
-
 export const StateContextProvider = ({ children }) => {
+  const [expanded, setExpanded] = useState(true);
   const [sidebar, setSidebar] = useState(true);
   // const navigate = useNavigate();
 
@@ -15,6 +15,8 @@ export const StateContextProvider = ({ children }) => {
           sidebar,
           setSidebar,
           // navigate,
+          expanded,
+          setExpanded,
         }}
       >
         {children}

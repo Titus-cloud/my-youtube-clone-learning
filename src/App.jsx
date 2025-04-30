@@ -10,12 +10,16 @@ const App = () => {
   const {setSidebar, sidebar} = useStateContext()
   return (
     <div>
-      <Navbar setSidebar= {setSidebar}/>
-      <SideBar />
-      <Routes>
-        <Route path="/" element={Home} sidebar = {sidebar}/>
-        <Route path="/video:categoryId/:videoId" element={Video} />
-      </Routes>
+      <Navbar />
+      <div className="flex">
+        <SideBar />
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/video/:categoryId/:videoId" element={<Video />} />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 };
