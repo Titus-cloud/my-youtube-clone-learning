@@ -6,10 +6,11 @@ import upload_icon from "../assets/upload.png";
 import more from "../assets/more.png";
 import notification from "../assets/notification.png";
 import profile from "../assets/jack.png";
-import {useStateContext} from '../../context'
+import { useStateContext } from "../../context";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const {setSidebar, sidebar,expanded,setExpanded} = useStateContext()
+  const { setSidebar, sidebar, expanded, setExpanded } = useStateContext();
   return (
     <nav className="text-[#5a5a5a] sticky top-0 z-10 flex items-center justify-between px-6 py-3 bg-white shadow-md">
       {/* Left: Menu and Logo */}
@@ -20,7 +21,9 @@ const Navbar = () => {
           onClick={() => setExpanded((prev) => (prev === false ? true : false))}
           className="cursor-pointer w-6 h-6"
         />
-        <img src={logo} alt="logo" className="cursor-pointer w-28" />
+        <Link to="/">
+          <img src={logo} alt="logo" className="cursor-pointer w-28" />
+        </Link>
       </div>
 
       {/* Middle: Search Bar */}

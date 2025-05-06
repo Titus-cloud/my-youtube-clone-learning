@@ -16,7 +16,8 @@ import cameron from "../assets/cameron.png";
 import { useStateContext } from "../../context";
 
 const SideBar = () => {
-  const { sidebar, setSidebar, expanded, setExpanded } = useStateContext();
+  const { sidebar, setSidebar, expanded, setExpanded, category, setCategory } =
+    useStateContext();
 
   return (
     <div
@@ -26,47 +27,92 @@ const SideBar = () => {
       {/* shortcut links */}
       <div className="">
         {/* side links */}
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 0 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(0)}
+        >
           <img src={home} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Home</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 20 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(20)}
+        >
           <img src={game} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Gaming</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 2 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(2)}
+        >
           <img src={automobiles} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Automobiles</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 17 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(17)}
+        >
           <img src={sports} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Sports</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 24 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(24)}
+        >
           <img src={entertainment} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Entertainment</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 28 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(28)}
+        >
           <img src={tech} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Teck</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 10 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(10)}
+        >
           <img src={music} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Music</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 22 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(22)}
+        >
           <img src={blogs} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>Blogs</p>}
         </div>
 
-        <div className="flex items-center mt-5 w-fit text-wrap cursor-pointer">
+        <div
+          className={`flex items-center mt-5 mb-5 w-fit text-wrap cursor-pointer border-b-2 transition-all duration-300 ${
+            category === 25 ? "border-red-500" : "border-transparent"
+          }`}
+          onClick={() => setCategory(25)}
+        >
           <img src={news} alt="" className="w-5 mr-5 " />{" "}
           {expanded && <p>News</p>}
         </div>
