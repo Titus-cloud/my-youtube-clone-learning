@@ -28,23 +28,30 @@ const Feed = () => {
     fetchData();
   }, [category]);
   return (
-    <div className="grid grid-cols-5 gap-4 mt-4 ">
-      {data.map((item, index) => {
-        return (
-          <Link key={index} to={`video/${item.snippet.categoryId}/${item.id}`} className="">
-            <img
-              src={item.snippet.thumbnails.medium.url}
-              alt=""
-              className="w-[370px] rounded-lg "
-            />
-            <h2 className="font-bold text-lg pt-2">{item.snippet.title} </h2>
-            <h3 className="text-gray-500 ">{item.snippet.channelTitle}</h3>
-            <p className="text-gray-500">
-              {valueConverter(item.statistics.likeCount)} &bull; {moment(item.snippet.publishedAt).fromNow()}
-            </p>
-          </Link>
-        );
-      })}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-4 px-4">
+      {data.map((item, index) => (
+        <Link
+          key={index}
+          to={`video/${item.snippet.categoryId}/${item.id}`}
+          className="block"
+        >
+          <img
+            src={item.snippet.thumbnails.medium.url}
+            alt=""
+            className="w-full rounded-lg"
+          />
+          <h2 className="font-bold text-base sm:text-lg pt-2">
+            {item.snippet.title}
+          </h2>
+          <h3 className="text-gray-500 text-sm sm:text-base">
+            {item.snippet.channelTitle}
+          </h3>
+          <p className="text-gray-500 text-sm sm:text-base">
+            {valueConverter(item.statistics.likeCount)} •{" "}
+            {moment(item.snippet.publishedAt).fromNow()}
+          </p>
+        </Link>
+      ))}
     </div>
   );
 };

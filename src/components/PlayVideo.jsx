@@ -16,7 +16,7 @@ const PlayVideo = () => {
   const { valueConverter } = useStateContext();
   const [chanelData, setChanelData] = useState(null);
   const [commentsData, setCommentsData] = useState([]);
-  const {videoId, categoryId } = useParams()
+  const { videoId, categoryId } = useParams();
 
   const fetchVideoData = async () => {
     const videodetailsUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
@@ -51,17 +51,19 @@ const PlayVideo = () => {
     fetchChanelData();
   }, [apiData]);
   return (
-    <div className="pl-[20%] pr-4 pt-4 w-[70%] ">
+    <div className="container mx-auto px-4 max-w-screen-xl pl-[13%] pr-4 pt-2">
       {/* Video Player */}
-      {/* <video src={video1} controls autoPlay muted className="w-full rounded-lg mb-4" /> */}
-      <iframe
-        src={`https://www.youtube.com/embed/${videoId}?autoplay=0`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        className="w-[100%] h-[37vh] "
-      ></iframe>
+      <div className="w-full aspect-video mb-4">
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=0`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          className="w-full h-full rounded-lg"
+        ></iframe>
+      </div>
+
       {/* Video Title */}
       <h3 className="text-xl font-semibold mb-1">
         {apiData?.snippet?.title || "Title Here"}
@@ -74,7 +76,7 @@ const PlayVideo = () => {
       </div>
 
       {/* Video Actions */}
-      <div className="flex items-center gap-6 mb-6">
+      <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-6">
         <span className="flex items-center gap-2 cursor-pointer">
           <img src={like} alt="like" className="w-5" />{" "}
           {valueConverter(apiData?.statistics?.likeCount)}
@@ -93,7 +95,7 @@ const PlayVideo = () => {
       <hr className="mb-6" />
 
       {/* Publisher Section */}
-      <div className="flex items-start gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-6">
         <img
           src={chanelData?.snippet.thumbnails.default.url}
           alt="channel"
@@ -108,10 +110,10 @@ const PlayVideo = () => {
             Subscribers
           </span>
           <p className="mt-2 text-gray-700">
-            {apiData?.snippet?.description.slice(0, 585)}.
+            {apiData?.snippet?.description?.slice(0, 585)}.
           </p>
         </div>
-        <button className="bg-red-600 text-white font-medium px-4 py-2 rounded hover:bg-red-700">
+        <button className="bg-red-600 text-white font-medium px-4 py-2 rounded hover:bg-red-700 mt-2 sm:mt-0">
           Subscribe
         </button>
       </div>
@@ -124,33 +126,31 @@ const PlayVideo = () => {
       </h4>
 
       {commentsData.map((comment, index) => {
+        const profileImg =
+          comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl ||
+          user;
+
         return (
           <div key={index} className="flex items-start gap-4 mb-6">
             <img
-              src={
-                comment?.snippet?.topLevelComment?.snippet
-                  ?.authorProfileImageUrl
-                  ? comment.snippet.topLevelComment.snippet
-                      .authorProfileImageUrl
-                  : {user}
-              }
+              src={profileImg}
               alt="user"
-              className="w-10 h-10 rounded-full"
+              className="w-10 h-10 rounded-full object-cover"
             />
             <div className="flex-1">
               <h3 className="font-medium">
                 {comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}
-                {/* <span className="text-gray-500 text-sm ml-2">{comment?.snippet?.topLevelComment?.snippet?.likeCount}</span> */}
               </h3>
               <p className="text-gray-700 mt-1">
                 {comment?.snippet?.topLevelComment?.snippet?.textDisplay}
-                {}
               </p>
 
               {/* Comment Actions */}
               <div className="flex items-center gap-3 mt-2">
                 <img src={like} alt="like" className="w-4 cursor-pointer" />
-                <span className="text-sm text-gray-600">{comment?.snippet?.topLevelComment?.snippet?.likeCount}</span>
+                <span className="text-sm text-gray-600">
+                  {comment?.snippet?.topLevelComment?.snippet?.likeCount}
+                </span>
                 <img
                   src={dislike}
                   alt="dislike"

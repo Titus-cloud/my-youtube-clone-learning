@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Recomended = ({ categoryId }) => {
   const [apiData, setApiData] = useState([]);
-  const {valueConverter} = useStateContext()
+  const { valueConverter } = useStateContext();
 
   const fetchData = async () => {
     const relatedVideo = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=70&regionCode=KE&videoCategoryId=${categoryId}&key=${API_KEY}`;
@@ -28,21 +28,31 @@ const Recomended = ({ categoryId }) => {
   }, []);
   return (
     // recommended
-    <div className="w-[30%] pt-4">
+    <div className="w-full sm:w-[70%] lg:w-[30%] pt-2 px-4">
       {/* side video */}
       {apiData.map((Video, index) => {
         return (
-          <Link to={`/video/${Video.snippet.categoryId}/${Video.id}`} key={index} className="flex gap-4 mb-2">
+          <Link
+            to={`/video/${Video.snippet.categoryId}/${Video.id}`}
+            key={index}
+            className="flex flex-col sm:flex-row gap-4 mb-4"
+          >
             <img
               src={Video?.snippet?.thumbnails?.medium?.url}
               alt=""
-              className="basis-[49%] w-[50%] rounded-lg "
+              className="w-full sm:w-[50%] rounded-lg object-cover"
             />
             {/* vid info */}
-            <div className="basis-[49%]">
-              <h4 className="text-sm mb-1 ">{Video?.snippet?.title} </h4>
-              <p>{Video?.snippet?.channelTitle}</p>
-              <p>{valueConverter(Video?.statistics?.viewCount)} views</p>
+            <div className="flex-1">
+              <h4 className="text-sm font-semibold mb-1 line-clamp-2">
+                {Video?.snippet?.title}
+              </h4>
+              <p className="text-gray-600 text-sm">
+                {Video?.snippet?.channelTitle}
+              </p>
+              <p className="text-gray-500 text-sm">
+                {valueConverter(Video?.statistics?.viewCount)} views
+              </p>
             </div>
           </Link>
         );
